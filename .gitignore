@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# this repository specific
+.idea/
+data/src/
+data/utf-8/
+data/docs/
