@@ -65,6 +65,13 @@ def test_extract_depth(epicenter_record):
     assert actual == expected["depth"]
 
 
+def test_extract_magnitude(epicenter_record):
+    line, expected = epicenter_record
+    actual = ex.extract_magnitude(line[52:54])
+
+    assert actual == expected["magnitude1"]
+
+
 def test_extract_epicenter(epicenter_record):
     line, expected = epicenter_record
     actual = ex.extract_epicenter(line)
