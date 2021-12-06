@@ -123,22 +123,22 @@ def test_extract_magnitude(epicenter_records):
         assert actual == expected["magnitude1"]
 
 
-def test_extract_epicenter(epicenter_records):
-    for line, expected in epicenter_records:
-        actual = ex.extract_epicenter(line)
-
-        for key, exp in expected.items():
-            assert actual[key] == exp
-
-
 @pytest.fixture(scope="function")
 def abnormal_epicenter_records():
     line1 = "A19190316169120   99  2823   99  12930   99   0            8 1      詳細不明                  1N\n"
     return (line1,)
 
 
-def test_extract_epicenter_raise_ExtractError(abnormal_epicenter_records):
-    for line in abnormal_epicenter_records:
-        with pytest.raises(ex.ExtractError):
-            ex.extract_epicenter(line)
+class TestExtractEpicenter:
 
+    def test_normal_records(self, epicenter_records):
+        for line, expected in epicenter_records:
+            actual = ex.extract_epicenter(line)
+            for key, exp in expected.items():
+                assert actual[key] == exp
+
+
+    def test_raise_ExtractError(self, abnormal_epicenter_records):
+        for line in abnormal_epicenter_records:
+            with pytest.raises(ex.ExtractError):
+                ex.extract_epicenter(line)
