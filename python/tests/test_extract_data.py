@@ -5,7 +5,7 @@ import extract_data as ex
 
 @pytest.fixture(scope="function")
 def epicenter_records():
-    line1 = "A2011031114461812 026 380621 056 1425166 087 237429590W84D5117662 64三陸沖                 2901K"
+    line1 = "A2011031114461812 026 380621 056 1425166 087 237429590W84D5117662 64三陸沖                 2901K\n"
     expected1 = {
         "time": datetime(2011, 3, 11, 14, 46, 18),
         "latitude": 38.10583333333334,
@@ -28,7 +28,7 @@ def epicenter_records():
         "epicenter_decision": "K"
     }
 
-    line2 = "A19190101121537   99  3414   99  13510   99   0            8 1      詳細不明                  1N"
+    line2 = "A19190101121537   99  3414   99  13510   99   0            8 1      詳細不明                  1N\n"
     expected2 = {
         "time": datetime(1919, 1, 1, 12, 15, 37),
         "latitude": 34.233333333333334,

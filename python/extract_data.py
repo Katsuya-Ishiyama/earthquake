@@ -45,35 +45,36 @@ def extract_magnitude(magnitude_str: str) -> float:
     return magnitude
 
 
-def extract_epicenter(line: str):
+def extract_epicenter(_line: str):
     extracted = {}
+    _line = _line.strip()
 
-    extracted["time"] = extract_datetime(line)
+    extracted["time"] = extract_datetime(_line)
     extracted["latitude"] = convert_latitude_longitude_deg(
-        degree=line[21:24],
-        minute=line[24:26],
-        second=line[26:28]
+        degree=_line[21:24],
+        minute=_line[24:26],
+        second=_line[26:28]
     )
     extracted["longitude"] = convert_latitude_longitude_deg(
-        degree=line[32:36],
-        minute=line[36:38],
-        second=line[38:40]
+        degree=_line[32:36],
+        minute=_line[36:38],
+        second=_line[38:40]
     )
-    extracted["depth"] = extract_depth(line)
-    extracted["magnitude1"] = extract_magnitude(line[52:54])
-    extracted["magnitude1_type"] = line[54] if line[54] != " " else None
-    extracted["magnitude2"] = extract_magnitude(line[55:57])
-    extracted["magnitude2_type"] = line[57] if line[57] != " " else None
-    extracted["travel_time_type"] = int(line[58]) if line[58] != " " else None
-    extracted["epicenter_evaluation"] = int(line[59]) if line[59] != " " else None
-    extracted["epicenter_information"] = int(line[60]) if line[60] != " " else None
-    extracted["max_seismic"] = int(line[61].strip())
-    extracted["damage"] = int(line[62]) if line[62] != " " else None
-    extracted["tsunami"] = int(line[63]) if line[63] != " " else None
-    extracted["region1"] = int(line[64]) if line[64] != " " else None
-    extracted["region2"] = int(line[65:68].strip()) if line[65:68] != "   " else None
-    extracted["epicenter_name"] = line[68:90].split(" ")[0]
-    extracted["observation_point"] = int(line[-6:-1].strip())
-    extracted["epicenter_decision"] = line[-1].strip()
+    extracted["depth"] = extract_depth(_line)
+    extracted["magnitude1"] = extract_magnitude(_line[52:54])
+    extracted["magnitude1_type"] = _line[54] if _line[54] != " " else None
+    extracted["magnitude2"] = extract_magnitude(_line[55:57])
+    extracted["magnitude2_type"] = _line[57] if _line[57] != " " else None
+    extracted["travel_time_type"] = int(_line[58]) if _line[58] != " " else None
+    extracted["epicenter_evaluation"] = int(_line[59]) if _line[59] != " " else None
+    extracted["epicenter_information"] = int(_line[60]) if _line[60] != " " else None
+    extracted["max_seismic"] = int(_line[61].strip())
+    extracted["damage"] = int(_line[62]) if _line[62] != " " else None
+    extracted["tsunami"] = int(_line[63]) if _line[63] != " " else None
+    extracted["region1"] = int(_line[64]) if _line[64] != " " else None
+    extracted["region2"] = int(_line[65:68].strip()) if _line[65:68] != "   " else None
+    extracted["epicenter_name"] = _line[68:90].split(" ")[0]
+    extracted["observation_point"] = int(_line[-6:-1].strip())
+    extracted["epicenter_decision"] = _line[-1].strip()
 
     return extracted
