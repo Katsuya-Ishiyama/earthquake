@@ -4,9 +4,9 @@ import extract_data as ex
 
 
 @pytest.fixture(scope="function")
-def epicenter_record():
-    line = "A2011031114461812 026 380621 056 1425166 087 237429590W84D5117662 64三陸沖                 2901K"
-    expected = {
+def epicenter_records():
+    line1 = "A2011031114461812 026 380621 056 1425166 087 237429590W84D5117662 64三陸沖                 2901K"
+    expected1 = {
         "time": datetime(2011, 3, 11, 14, 46, 18),
         "latitude": 38.10583333333334,
         "longitude": 142.86833333333334,
@@ -28,55 +28,82 @@ def epicenter_record():
         "epicenter_decision": "K"
     }
 
-    return line, expected
+    line2 = "A19190101121537   99  3414   99  13510   99   0            8 1      詳細不明                  1N"
+    expected2 = {
+        "time": datetime(1919, 1, 1, 12, 15, 37),
+        "latitude": 34.233333333333334,
+        "longitude": 135.16666666666666,
+        "depth": 0.0,
+        "magnitude1": None,
+        "magnitude1_type": None,
+        "magnitude2": None,
+        "magnitude2_type": None,
+        "travel_time_type": None,
+        "epicenter_evaluation": 8,
+        "epicenter_information": None,
+        "max_seismic": 1,
+        "damage": None,
+        "tsunami": None,
+        "region1": None,
+        "region2": None,
+        "epicenter_name": "詳細不明",
+        "observation_point": 1,
+        "epicenter_decision": "N"
+    }
+
+    records = [
+        (line1, expected1),
+        (line2, expected2)
+    ]
+    return records
 
 
-def test_extract_datetime(epicenter_record):
-    line, expected = epicenter_record
-    actual = ex.extract_datetime(line)
-    assert actual == expected["time"]
+def test_extract_datetime(epicenter_records):
+    for line, expected in epicenter_records:
+        actual = ex.extract_datetime(line)
+        assert actual == expected["time"]
 
 
 class TestConvertLatitudeLongitudeDeg:
 
-    def test_latitude(self, epicenter_record):
-        line, expected = epicenter_record
-        actual = ex.convert_latitude_longitude_deg(
-            degree=line[21:24],
-            minute=line[24:26],
-            second=line[26:28]
-        )
-        assert actual == expected["latitude"]
+    def test_latitude(self, epicenter_records):
+        for line, expected in epicenter_records:
+            actual = ex.convert_latitude_longitude_deg(
+                degree=line[21:24],
+                minute=line[24:26],
+                second=line[26:28]
+            )
+            assert actual == expected["latitude"]
 
-    def test_longitude(self, epicenter_record):
-        line, expected = epicenter_record
-        actual = ex.convert_latitude_longitude_deg(
-            degree=line[32:36],
-            minute=line[36:38],
-            second=line[38:40]
-        )
-        assert actual == expected["longitude"]
-
-
-def test_extract_depth(epicenter_record):
-    line, expected = epicenter_record
-    actual = ex.extract_depth(line)
-
-    assert actual == expected["depth"]
+    def test_longitude(self, epicenter_records):
+        for line, expected in epicenter_records:
+            actual = ex.convert_latitude_longitude_deg(
+                degree=line[32:36],
+                minute=line[36:38],
+                second=line[38:40]
+            )
+            assert actual == expected["longitude"]
 
 
-def test_extract_magnitude(epicenter_record):
-    line, expected = epicenter_record
-    actual = ex.extract_magnitude(line[52:54])
+def test_extract_depth(epicenter_records):
+    for line, expected in epicenter_records:
+        actual = ex.extract_depth(line)
 
-    assert actual == expected["magnitude1"]
+        assert actual == expected["depth"]
 
 
-def test_extract_epicenter(epicenter_record):
-    line, expected = epicenter_record
-    actual = ex.extract_epicenter(line)
+def test_extract_magnitude(epicenter_records):
+    for line, expected in epicenter_records:
+        actual = ex.extract_magnitude(line[52:54])
 
-    for key, exp in expected.items():
-        assert actual[key] == exp
+        assert actual == expected["magnitude1"]
+
+
+def test_extract_epicenter(epicenter_records):
+    for line, expected in epicenter_records:
+        actual = ex.extract_epicenter(line)
+
+        for key, exp in expected.items():
+            assert actual[key] == exp
 
 
