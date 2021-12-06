@@ -1,12 +1,20 @@
 from datetime import datetime
 
 
+class ExtractError(Exception):
+    pass
+
+
 def extract_datetime(line: str) -> datetime:
     year = int(line[1:5])
     month = int(line[5:7])
     day = int(line[7:9])
     hour = int(line[9:11])
+
     minute = int(line[11:13])
+    if (minute < 0) or (59 < minute):
+        raise ExtractError
+
     try:
         second = int(line[13:15])
     except ValueError:
