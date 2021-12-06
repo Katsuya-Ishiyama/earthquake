@@ -7,7 +7,12 @@ def extract_datetime(line: str) -> datetime:
     day = int(line[7:9])
     hour = int(line[9:11])
     minute = int(line[11:13])
-    second = int(line[13:15])
+    try:
+        second = int(line[13:15])
+    except ValueError:
+        second = 0
+    except Exception as e:
+        raise e
     return datetime(year, month, day, hour, minute, second)
 
 

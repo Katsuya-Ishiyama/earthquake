@@ -51,9 +51,33 @@ def epicenter_records():
         "epicenter_decision": "N"
     }
 
+    line3 = "A191901091518     99  3615   99  13758   99   0            8 1      詳細不明                  1N\n"
+    expected3 = {
+        "time": datetime(1919, 1, 9, 15, 18),
+        "latitude": 36.25000000,
+        "longitude": 137.96666666666667,
+        "depth": 0.0,
+        "magnitude1": None,
+        "magnitude1_type": None,
+        "magnitude2": None,
+        "magnitude2_type": None,
+        "travel_time_type": None,
+        "epicenter_evaluation": 8,
+        "epicenter_information": None,
+        "max_seismic": 1,
+        "damage": None,
+        "tsunami": None,
+        "region1": None,
+        "region2": None,
+        "epicenter_name": "詳細不明",
+        "observation_point": 1,
+        "epicenter_decision": "N"
+    }
+
     records = [
         (line1, expected1),
-        (line2, expected2)
+        (line2, expected2),
+        (line3, expected3),
     ]
     return records
 
