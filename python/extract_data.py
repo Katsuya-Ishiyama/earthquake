@@ -77,6 +77,28 @@ def extract_magnitude(magnitude_str: str) -> float:
     return magnitude
 
 
+FIELDNAMES = (
+    "time",
+    "latitude",
+    "longitude",
+    "depth",
+    "magnitude1",
+    "magnitude1_type",
+    "magnitude2",
+    "magnitude2_type",
+    "travel_time_type",
+    "epicenter_evaluation",
+    "epicenter_information",
+    "max_seismic",
+    "damage",
+    "tsunami",
+    "region1",
+    "region2",
+    "epicenter_name",
+    "observation_point",
+    "epicenter_decision"
+)
+
 def extract_epicenter(_line: str):
     extracted = {}
     _line = _line.strip()
