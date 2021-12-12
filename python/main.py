@@ -29,7 +29,7 @@ def convert_dat_to_tsv(input_filepath, output_filepath):
             converted_count += 1
     end_ts = datetime.now()
     elapsed_time = end_ts - start_ts
-    logger.info(f"{output_filepath} has {converted_count} records, time {elapsed_time}")
+    logger.info(f"{output_filepath} has {converted_count} records, time {elapsed_time}"),
 
 
 def main():
