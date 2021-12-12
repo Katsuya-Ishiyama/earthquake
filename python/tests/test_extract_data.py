@@ -93,18 +93,20 @@ class TestConvertLatitudeLongitudeDeg:
     def test_latitude(self, epicenter_records):
         for line, expected in epicenter_records:
             actual = ex.convert_latitude_longitude_deg(
-                degree=line[21:24],
-                minute=line[24:26],
-                second=line[26:28]
+                line=line,
+                degree=21,
+                minute=24,
+                second=26
             )
             assert actual == expected["latitude"]
 
     def test_longitude(self, epicenter_records):
         for line, expected in epicenter_records:
             actual = ex.convert_latitude_longitude_deg(
-                degree=line[32:36],
-                minute=line[36:38],
-                second=line[38:40]
+                line=line,
+                degree=32,
+                minute=36,
+                second=38
             )
             assert actual == expected["longitude"]
 
