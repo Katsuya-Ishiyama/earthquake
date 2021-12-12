@@ -19,7 +19,7 @@ def epicenter_records():
         "epicenter_evaluation": 1,
         "epicenter_information": 1,
         "max_seismic": 7,
-        "damage": 6,
+        "damage": "6",
         "tsunami": 6,
         "region1": 2,
         "region2": 64,
@@ -74,10 +74,34 @@ def epicenter_records():
         "epicenter_decision": "N"
     }
 
+    line4 = "A1968022501013347 075 341843 355 1391630 456 39     49J   5213Y 3103新島・神津島近海          3K\n"
+    expected4 = {
+        "time": datetime(1968, 2, 25, 1, 1, 33),
+        "latitude": 34.31194444444444,
+        "longitude": 139.27500000,
+        "depth": 39,
+        "magnitude1": 4.9,
+        "magnitude1_type": "J",
+        "magnitude2": None,
+        "magnitude2_type": None,
+        "travel_time_type": 5,
+        "epicenter_evaluation": 2,
+        "epicenter_information": 1,
+        "max_seismic": 3,
+        "damage": "Y",
+        "tsunami": None,
+        "region1": 3,
+        "region2": 103,
+        "epicenter_name": "新島・神津島近海",
+        "observation_point": 3,
+        "epicenter_decision": "K"
+    }
+
     records = [
         (line1, expected1),
         (line2, expected2),
         (line3, expected3),
+        (line4, expected4),
     ]
     return records
 
@@ -123,6 +147,13 @@ def test_extract_magnitude(epicenter_records):
         actual = ex.extract_magnitude(line[52:54])
 
         assert actual == expected["magnitude1"]
+
+
+def test_extract_damage(epicenter_records):
+    for line, expected in epicenter_records:
+        actual = ex.extract_damage(line)
+
+        assert actual == expected["damage"]
 
 
 @pytest.fixture(scope="function")

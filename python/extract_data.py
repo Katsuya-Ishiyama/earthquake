@@ -77,6 +77,13 @@ def extract_magnitude(magnitude_str: str) -> float:
     return magnitude
 
 
+def extract_damage(line: str) -> str:
+    damage_str = line[62]
+    if damage_str == " ":
+        return None
+    return damage_str
+
+
 FIELDNAMES = (
     "time",
     "latitude",
@@ -125,7 +132,7 @@ def extract_epicenter(_line: str):
     extracted["epicenter_evaluation"] = int(_line[59]) if _line[59] != " " else None
     extracted["epicenter_information"] = int(_line[60]) if _line[60] != " " else None
     extracted["max_seismic"] = int(_line[61].strip())
-    extracted["damage"] = int(_line[62]) if _line[62] != " " else None
+    extracted["damage"] = extract_damage(_line)
     extracted["tsunami"] = int(_line[63]) if _line[63] != " " else None
     extracted["region1"] = int(_line[64]) if _line[64] != " " else None
     extracted["region2"] = int(_line[65:68].strip()) if _line[65:68] != "   " else None
