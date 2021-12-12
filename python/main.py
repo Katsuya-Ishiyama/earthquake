@@ -24,6 +24,9 @@ def convert_dat_to_tsv(input_filepath, output_filepath):
             except ex.ExtractError as e:
                 logger.warning("skipped due to ExtractError: %s", line)
                 continue
+            except Exception as e:
+                logger.error("error line: %s", line)
+                raise e
 
             writer.writerow(epicenter)
             converted_count += 1
