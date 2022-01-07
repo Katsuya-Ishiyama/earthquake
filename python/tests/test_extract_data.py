@@ -18,7 +18,7 @@ def epicenter_records():
         "travel_time_type": 5,
         "epicenter_evaluation": 1,
         "epicenter_information": 1,
-        "max_seismic": 7,
+        "max_seismic": "7",
         "damage": "6",
         "tsunami": "6",
         "region1": 2,
@@ -41,7 +41,7 @@ def epicenter_records():
         "travel_time_type": None,
         "epicenter_evaluation": 8,
         "epicenter_information": None,
-        "max_seismic": 1,
+        "max_seismic": "1",
         "damage": None,
         "tsunami": None,
         "region1": None,
@@ -64,7 +64,7 @@ def epicenter_records():
         "travel_time_type": None,
         "epicenter_evaluation": 8,
         "epicenter_information": None,
-        "max_seismic": 1,
+        "max_seismic": "1",
         "damage": None,
         "tsunami": None,
         "region1": None,
@@ -87,7 +87,7 @@ def epicenter_records():
         "travel_time_type": 5,
         "epicenter_evaluation": 2,
         "epicenter_information": 1,
-        "max_seismic": 3,
+        "max_seismic": "3",
         "damage": "Y",
         "tsunami": None,
         "region1": 3,
@@ -110,7 +110,7 @@ def epicenter_records():
         "travel_time_type": 5,
         "epicenter_evaluation": 2,
         "epicenter_information": 1,
-        "max_seismic": 5,
+        "max_seismic": "5",
         "damage": "3",
         "tsunami": "T",
         "region1": 7,
@@ -120,12 +120,36 @@ def epicenter_records():
         "epicenter_decision": "K"
     }
 
+    line6 = "A2007032509415791 008 371324 016 1364116 040 107005369D66V511D314167能登半島沖             1740K\n"
+    expected6 = {
+        "time": datetime(2007, 3, 25, 9, 41, 57),
+        "latitude": 37.223333333333336,
+        "longitude": 136.68777777777777,
+        "depth": 10.7,
+        "magnitude1": 6.9,
+        "magnitude1_type": "D",
+        "magnitude2": 6.6,
+        "magnitude2_type": "V",
+        "travel_time_type": 5,
+        "epicenter_evaluation": 1,
+        "epicenter_information": 1,
+        "max_seismic": "D",
+        "damage": "3",
+        "tsunami": "1",
+        "region1": 4,
+        "region2": 167,
+        "epicenter_name": "能登半島沖",
+        "observation_point": 1740,
+        "epicenter_decision": "K"
+    }
+
     records = [
         (line1, expected1),
         (line2, expected2),
         (line3, expected3),
         (line4, expected4),
         (line5, expected5),
+        (line6, expected6),
     ]
     return records
 
