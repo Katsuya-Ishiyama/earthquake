@@ -20,7 +20,7 @@ def epicenter_records():
         "epicenter_information": 1,
         "max_seismic": 7,
         "damage": "6",
-        "tsunami": 6,
+        "tsunami": "6",
         "region1": 2,
         "region2": 64,
         "epicenter_name": "三陸沖",
@@ -97,11 +97,35 @@ def epicenter_records():
         "epicenter_decision": "K"
     }
 
+    line5 = "A1968040109420403 048 322693 237 1322627 184 22     75J   52153T7300日向灘                   77K\n"
+    expected5 = {
+        "time": datetime(1968, 4, 1, 9, 42, 4),
+        "latitude": 32.45916666666666,
+        "longitude": 132.44083333333333,
+        "depth": 22,
+        "magnitude1": 7.5,
+        "magnitude1_type": "J",
+        "magnitude2": None,
+        "magnitude2_type": None,
+        "travel_time_type": 5,
+        "epicenter_evaluation": 2,
+        "epicenter_information": 1,
+        "max_seismic": 5,
+        "damage": "3",
+        "tsunami": "T",
+        "region1": 7,
+        "region2": 300,
+        "epicenter_name": "日向灘",
+        "observation_point": 77,
+        "epicenter_decision": "K"
+    }
+
     records = [
         (line1, expected1),
         (line2, expected2),
         (line3, expected3),
         (line4, expected4),
+        (line5, expected5),
     ]
     return records
 

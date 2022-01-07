@@ -133,7 +133,7 @@ def extract_epicenter(_line: str):
     extracted["epicenter_information"] = int(_line[60]) if _line[60] != " " else None
     extracted["max_seismic"] = int(_line[61].strip())
     extracted["damage"] = extract_damage(_line)
-    extracted["tsunami"] = int(_line[63]) if _line[63] != " " else None
+    extracted["tsunami"] = _line[63] if _line[63] != " " else None
     extracted["region1"] = int(_line[64]) if _line[64] != " " else None
     extracted["region2"] = int(_line[65:68].strip()) if _line[65:68] != "   " else None
     extracted["epicenter_name"] = _line[68:90].split(" ")[0]
