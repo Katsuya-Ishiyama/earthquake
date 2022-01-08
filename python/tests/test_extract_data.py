@@ -189,6 +189,29 @@ def epicenter_records():
         "epicenter_decision": "I"
     }
 
+    line9 = "A1920092202421216     445124     1532832     150    65W      1      千島列島南東沖            2 \n"
+    expected9 = {
+        "time": datetime(1920, 9, 22, 2, 42, 12),
+        "latitude": 44.85666666666667,
+        "longitude": 153.47555555555556,
+        "depth": 15.0,
+        "magnitude1": 6.5,
+        "magnitude1_type": "W",
+        "magnitude2": None,
+        "magnitude2_type": None,
+        "travel_time_type": None,
+        "epicenter_evaluation": None,
+        "epicenter_information": None,
+        "max_seismic": "1",
+        "damage": None,
+        "tsunami": None,
+        "region1": None,
+        "region2": None,
+        "epicenter_name": "千島列島南東沖",
+        "observation_point": 2,
+        "epicenter_decision": None
+    }
+
     records = [
         (line1, expected1),
         (line2, expected2),
@@ -198,6 +221,7 @@ def epicenter_records():
         (line6, expected6),
         (line7, expected7),
         (line8, expected8),
+        (line9, expected9),
     ]
     return records
 

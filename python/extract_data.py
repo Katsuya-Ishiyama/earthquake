@@ -1,5 +1,6 @@
 from datetime import datetime
 from logging import getLogger
+import re
 
 logger = getLogger(__name__)
 
@@ -126,7 +127,7 @@ FIELDNAMES = (
 
 def extract_epicenter(_line: str):
     extracted = {}
-    _line = _line.strip()
+    _line = _line.strip("\n")
 
     extracted["time"] = extract_datetime(_line)
     extracted["latitude"] = convert_latitude_longitude_deg(
@@ -156,6 +157,6 @@ def extract_epicenter(_line: str):
     extracted["region2"] = int(_line[65:68].strip()) if _line[65:68] != "   " else None
     extracted["epicenter_name"] = _line[68:90].split(" ")[0]
     extracted["observation_point"] = int(_line[-6:-1].strip())
-    extracted["epicenter_decision"] = _line[-1].strip()
+    extracted["epicenter_decision"] = _line[-1].strip() if _line[-1] != " " else None
 
     return extracted
