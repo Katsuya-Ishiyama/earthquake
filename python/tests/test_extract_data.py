@@ -182,6 +182,16 @@ class TestConvertLatitudeLongitudeDeg:
             )
             assert actual == expected["longitude"]
 
+    def test_latitude_raise_ExtractError(self):
+        line = "A194804282359000                                             1      時分不明データ  　　　    1D\n"
+        with pytest.raises(ex.ExtractError):
+            ex.convert_latitude_longitude_deg(
+                line=line,
+                degree=21,
+                minute=24,
+                second=26
+            )
+
 
 def test_extract_depth(epicenter_records):
     for line, expected in epicenter_records:

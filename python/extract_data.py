@@ -40,8 +40,13 @@ def convert_latitude_longitude_deg(line: str, degree: int, minute: int, second: 
     _minute = line[minute:second]
     _second = line[second:(second+2)]
 
-    deg_degree = int(_degree)
+    try:
+        deg_degree = int(_degree)
+    except Exception:
+        raise ExtractError
+
     deg_minute = int(_minute) / 60
+
     try:
         deg_second = int(_second) / 3600
     except ValueError:
