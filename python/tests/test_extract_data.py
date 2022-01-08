@@ -166,6 +166,29 @@ def epicenter_records():
         "epicenter_decision": "I"
     }
 
+    line8 = "A19610414002611       27         12818      197            212  7294沖縄本島近海              2I\n"
+    expected8 = {
+        "time": datetime(1961, 4, 14, 0, 26, 11),
+        "latitude": 27,
+        "longitude": 128.30000000,
+        "depth": 197,
+        "magnitude1": None,
+        "magnitude1_type": None,
+        "magnitude2": None,
+        "magnitude2_type": None,
+        "travel_time_type": None,
+        "epicenter_evaluation": 2,
+        "epicenter_information": 1,
+        "max_seismic": "2",
+        "damage": None,
+        "tsunami": None,
+        "region1": 7,
+        "region2": 294,
+        "epicenter_name": "沖縄本島近海",
+        "observation_point": 2,
+        "epicenter_decision": "I"
+    }
+
     records = [
         (line1, expected1),
         (line2, expected2),
@@ -174,6 +197,7 @@ def epicenter_records():
         (line5, expected5),
         (line6, expected6),
         (line7, expected7),
+        (line8, expected8),
     ]
     return records
 

@@ -45,7 +45,14 @@ def convert_latitude_longitude_deg(line: str, degree: int, minute: int, second: 
     except Exception:
         raise ExtractError
 
-    deg_minute = int(_minute) / 60
+    try:
+        deg_minute = int(_minute) / 60
+    except ValueError:
+        deg_minute = 0.0
+        line_id = extract_line_identifier(line)
+        logger.warning('second "%s" was converted into %d, %s', _minute, deg_minute, line_id)
+    except Exception as e:
+        raise e
 
     try:
         deg_second = int(_second) / 3600
