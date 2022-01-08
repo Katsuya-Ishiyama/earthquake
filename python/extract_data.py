@@ -60,7 +60,13 @@ def convert_latitude_longitude_deg(line: str, degree: int, minute: int, second: 
 
 
 def extract_depth(line: str) -> float:
-    _int = int(line[44:47])
+    try:
+        _int = int(line[44:47])
+    except:
+        line_id = extract_line_identifier(line)
+        logger.warning('depth was replaced with None from "   ", %s', line_id)
+        return None
+
     try:
         _decimal = int(line[47:49]) / 100
     except ValueError:

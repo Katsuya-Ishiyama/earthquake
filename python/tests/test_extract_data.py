@@ -143,6 +143,29 @@ def epicenter_records():
         "epicenter_decision": "K"
     }
 
+    line7 = "A19481221080719       2324       12136                      11  8311台湾付近                  1I\n"
+    expected7 = {
+        "time": datetime(1948, 12, 21, 8, 7, 19),
+        "latitude": 23.40000000,
+        "longitude": 121.60000000,
+        "depth": None,
+        "magnitude1": None,
+        "magnitude1_type": None,
+        "magnitude2": None,
+        "magnitude2_type": None,
+        "travel_time_type": None,
+        "epicenter_evaluation": None,
+        "epicenter_information": 1,
+        "max_seismic": "1",
+        "damage": None,
+        "tsunami": None,
+        "region1": 8,
+        "region2": 311,
+        "epicenter_name": "台湾付近",
+        "observation_point": 1,
+        "epicenter_decision": "I"
+    }
+
     records = [
         (line1, expected1),
         (line2, expected2),
@@ -150,6 +173,7 @@ def epicenter_records():
         (line4, expected4),
         (line5, expected5),
         (line6, expected6),
+        (line7, expected7),
     ]
     return records
 
