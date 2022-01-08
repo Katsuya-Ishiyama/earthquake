@@ -46,7 +46,6 @@ def main():
             input_filepath=input_filepath,
             output_filepath=output_filepath
         )
-        break
 
 
 if __name__ == "__main__":
