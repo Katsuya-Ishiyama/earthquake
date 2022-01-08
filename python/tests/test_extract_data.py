@@ -29,8 +29,32 @@ def epicenter_records():
         "epicenter_decision": "K"
     }
 
-    line2 = "A19190101121537   99  3414   99  13510   99   0            8 1      詳細不明                  1N\n"
+    line2 = "A1995011705465186 008 343590 034 1350210 037 160615073J74D1117615205大阪湾                   94K\n"
     expected2 = {
+        "id": "A19950117054651",
+        "time": datetime(1995, 1, 17, 5, 46, 51),
+        "latitude": 34.608333333333334,
+        "longitude": 135.0361111111111,
+        "depth": 16.06,
+        "magnitude1": 7.3,
+        "magnitude1_type": "J",
+        "magnitude2": 7.4,
+        "magnitude2_type": "D",
+        "travel_time_type": 1,
+        "epicenter_evaluation": 1,
+        "epicenter_information": 1,
+        "max_seismic": "7",
+        "damage": "6",
+        "tsunami": "1",
+        "region1": 5,
+        "region2": 205,
+        "epicenter_name": "大阪湾",
+        "observation_point": 94,
+        "epicenter_decision": "K"
+    }
+
+    line3 = "A19190101121537   99  3414   99  13510   99   0            8 1      詳細不明                  1N\n"
+    expected3 = {
         "id": "A19190101121537",
         "time": datetime(1919, 1, 1, 12, 15, 37),
         "latitude": 34.233333333333334,
@@ -53,8 +77,8 @@ def epicenter_records():
         "epicenter_decision": "N"
     }
 
-    line3 = "A191901091518     99  3615   99  13758   99   0            8 1      詳細不明                  1N\n"
-    expected3 = {
+    line4 = "A191901091518     99  3615   99  13758   99   0            8 1      詳細不明                  1N\n"
+    expected4 = {
         "id": "A191901091518",
         "time": datetime(1919, 1, 9, 15, 18),
         "latitude": 36.25000000,
@@ -77,8 +101,8 @@ def epicenter_records():
         "epicenter_decision": "N"
     }
 
-    line4 = "A1968022501013347 075 341843 355 1391630 456 39     49J   5213Y 3103新島・神津島近海          3K\n"
-    expected4 = {
+    line5 = "A1968022501013347 075 341843 355 1391630 456 39     49J   5213Y 3103新島・神津島近海          3K\n"
+    expected5 = {
         "id": "A19680225010133",
         "time": datetime(1968, 2, 25, 1, 1, 33),
         "latitude": 34.31194444444444,
@@ -101,8 +125,8 @@ def epicenter_records():
         "epicenter_decision": "K"
     }
 
-    line5 = "A1968040109420403 048 322693 237 1322627 184 22     75J   52153T7300日向灘                   77K\n"
-    expected5 = {
+    line6 = "A1968040109420403 048 322693 237 1322627 184 22     75J   52153T7300日向灘                   77K\n"
+    expected6 = {
         "id": "A19680401094204",
         "time": datetime(1968, 4, 1, 9, 42, 4),
         "latitude": 32.45916666666666,
@@ -125,8 +149,8 @@ def epicenter_records():
         "epicenter_decision": "K"
     }
 
-    line6 = "A2007032509415791 008 371324 016 1364116 040 107005369D66V511D314167能登半島沖             1740K\n"
-    expected6 = {
+    line7 = "A2007032509415791 008 371324 016 1364116 040 107005369D66V511D314167能登半島沖             1740K\n"
+    expected7 = {
         "id": "A20070325094157",
         "time": datetime(2007, 3, 25, 9, 41, 57),
         "latitude": 37.223333333333336,
@@ -149,8 +173,8 @@ def epicenter_records():
         "epicenter_decision": "K"
     }
 
-    line7 = "A19481221080719       2324       12136                      11  8311台湾付近                  1I\n"
-    expected7 = {
+    line8 = "A19481221080719       2324       12136                      11  8311台湾付近                  1I\n"
+    expected8 = {
         "id": "A19481221080719",
         "time": datetime(1948, 12, 21, 8, 7, 19),
         "latitude": 23.40000000,
@@ -173,8 +197,8 @@ def epicenter_records():
         "epicenter_decision": "I"
     }
 
-    line8 = "A19610414002611       27         12818      197            212  7294沖縄本島近海              2I\n"
-    expected8 = {
+    line9 = "A19610414002611       27         12818      197            212  7294沖縄本島近海              2I\n"
+    expected9 = {
         "id": "A19610414002611",
         "time": datetime(1961, 4, 14, 0, 26, 11),
         "latitude": 27,
@@ -197,8 +221,8 @@ def epicenter_records():
         "epicenter_decision": "I"
     }
 
-    line9 = "A1920092202421216     445124     1532832     150    65W      1      千島列島南東沖            2 \n"
-    expected9 = {
+    line10 = "A1920092202421216     445124     1532832     150    65W      1      千島列島南東沖            2 \n"
+    expected10 = {
         "id": "A19200922024212",
         "time": datetime(1920, 9, 22, 2, 42, 12),
         "latitude": 44.85666666666667,
@@ -231,6 +255,7 @@ def epicenter_records():
         (line7, expected7),
         (line8, expected8),
         (line9, expected9),
+        (line10, expected10),
     ]
     return records
 
