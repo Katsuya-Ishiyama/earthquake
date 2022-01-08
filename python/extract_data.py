@@ -104,6 +104,7 @@ def extract_damage(line: str) -> str:
 
 
 FIELDNAMES = (
+    "id",
     "time",
     "latitude",
     "longitude",
@@ -129,6 +130,7 @@ def extract_epicenter(_line: str):
     extracted = {}
     _line = _line.strip("\n")
 
+    extracted["id"] = extract_line_identifier(_line)
     extracted["time"] = extract_datetime(_line)
     extracted["latitude"] = convert_latitude_longitude_deg(
         line=_line,
