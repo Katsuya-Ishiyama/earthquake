@@ -133,3 +133,4 @@ dmypy.json
 data/src/
 data/utf-8/
 data/docs/
+jupyter/data/
