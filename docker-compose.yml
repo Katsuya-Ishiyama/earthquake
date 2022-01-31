@@ -4,9 +4,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+      NB_USER: jupyter
+      NB_UID: 1000
+      NB_GID: 100
+      CHOWN_HOME: "yes"
+      CHOWN_HOME_OPTS: "-R"
     volumes:
-      - ./jupyter:/home/jupyter
-      - ./data:/home/jupyter/data
+      - ./jupyter:/home/jupyter/work
+      - ./data:/home/jupyter/work/data
     ports:
       - "8888:8888"
     entrypoint: jupyter notebook --NotebookApp.token='' --no-browser --port 8888 --ip=0.0.0.0
