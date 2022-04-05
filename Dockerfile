@@ -18,3 +18,4 @@ RUN python -m pip install --upgrade pip setuptools &&\
     python -m pip install --user -r requirements.txt &&\
     rm requirements.txt
 
+ENV SHELL /bin/bash
