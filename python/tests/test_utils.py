@@ -4,7 +4,6 @@ import yaml
 
 
 class TestLoadConfig:
-
     @pytest.fixture(scope="function")
     def config_path(self, tmp_path):
         _yml = """\
@@ -27,4 +26,3 @@ data:
             expected = yaml.safe_load(f)
 
         assert actual == expected
-

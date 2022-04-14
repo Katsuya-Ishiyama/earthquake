@@ -2,8 +2,9 @@ import csv
 import logging
 from datetime import datetime
 from pathlib import Path
-import pandas as pd
+
 import extract_data as ex
+import pandas as pd
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +34,9 @@ def read_dat_as_DataFrame(input_filepath):
     df = pd.DataFrame.from_records(records)
     end_ts = datetime.now()
     elapsed_time = end_ts - start_ts
-    logger.info(f"finish reading from {input_filepath}, shape: {df.shape}, time {elapsed_time}"),
+    logger.info(
+        f"finish reading from {input_filepath}, shape: {df.shape}, time {elapsed_time}"
+    ),
 
     return df
 
@@ -63,17 +66,23 @@ def convert_dat_to_tsv(input_filepath, output_filepath):
             converted_count += 1
     end_ts = datetime.now()
     elapsed_time = end_ts - start_ts
-    logger.info(f"{output_filepath} has {converted_count} records, time {elapsed_time}"),
+    logger.info(
+        f"{output_filepath} has {converted_count} records, time {elapsed_time}"
+    ),
 
 
 def main():
     input_dir = Path("../data/utf-8")
 
-    df_list = [read_dat_as_DataFrame(path) for path in input_dir.glob("i*.dat")]
+    df_list = [
+        read_dat_as_DataFrame(path) for path in input_dir.glob("i*.dat")
+    ]
     df_all = pd.concat(df_list)
     df_all["year"] = df_all.time.map(lambda x: x.year)
     df_all.sort_values(by="id", inplace=True)
-    df_all.to_parquet("../data/parquet/epicenters", compression="gzip", partition_cols="year")
+    df_all.to_parquet(
+        "../data/parquet/epicenters", compression="gzip", partition_cols="year"
+    )
 
 
 if __name__ == "__main__":
@@ -81,6 +90,6 @@ if __name__ == "__main__":
     logging.basicConfig(
         format="[%(asctime)s][%(levelname)s][%(name)s]L%(lineno)s - %(message)s",
         level=logging.INFO,
-        handlers=[file_handler]
+        handlers=[file_handler],
     )
     main()

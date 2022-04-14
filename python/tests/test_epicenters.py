@@ -1,11 +1,10 @@
-import pandas as pd
-from pandas.testing import assert_frame_equal
-import pytest
 import epicenters
+import pandas as pd
+import pytest
+from pandas.testing import assert_frame_equal
 
 
 class TestLoadData:
-
     @pytest.fixture(scope="function")
     def parquet_data(self, tmp_path):
         path_parquet = tmp_path / "epicenters"
@@ -36,12 +35,14 @@ data:
                 "2019-12-31 23:59:59",
                 "2020-01-01 00:00:00",
             ],
-            "col1": [1, 2, 3, 4, 5, 6]
+            "col1": [1, 2, 3, 4, 5, 6],
         }
         df_all = pd.DataFrame(data)
         df_all["time"] = pd.to_datetime(df_all.time)
         df_all["year"] = df_all.time.map(lambda x: x.year)
-        df_all.to_parquet(path_parquet, compression="gzip", partition_cols="year")
+        df_all.to_parquet(
+            path_parquet, compression="gzip", partition_cols="year"
+        )
 
         df_all["year"] = df_all.year.astype("category")
 
