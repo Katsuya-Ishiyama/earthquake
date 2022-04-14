@@ -8,5 +8,5 @@ setup(
     license="",
     author="Katsuya-Ishiyama",
     author_email="ishiyama.katsuya@gmail.com",
-    description=""
+    description="",
 )

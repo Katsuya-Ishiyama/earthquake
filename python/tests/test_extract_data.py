@@ -1,6 +1,7 @@
 from datetime import datetime
-import pytest
+
 import extract_data as ex
+import pytest
 
 
 @pytest.fixture(scope="function")
@@ -26,7 +27,7 @@ def epicenter_records():
         "region2": 64,
         "epicenter_name": "三陸沖",
         "observation_point": 2901,
-        "epicenter_decision": "K"
+        "epicenter_decision": "K",
     }
 
     line2 = "A1995011705465186 008 343590 034 1350210 037 160615073J74D1117615205大阪湾                   94K\n"
@@ -50,7 +51,7 @@ def epicenter_records():
         "region2": 205,
         "epicenter_name": "大阪湾",
         "observation_point": 94,
-        "epicenter_decision": "K"
+        "epicenter_decision": "K",
     }
 
     line3 = "A19190101121537   99  3414   99  13510   99   0            8 1      詳細不明                  1N\n"
@@ -74,7 +75,7 @@ def epicenter_records():
         "region2": None,
         "epicenter_name": "詳細不明",
         "observation_point": 1,
-        "epicenter_decision": "N"
+        "epicenter_decision": "N",
     }
 
     line4 = "A191901091518     99  3615   99  13758   99   0            8 1      詳細不明                  1N\n"
@@ -98,7 +99,7 @@ def epicenter_records():
         "region2": None,
         "epicenter_name": "詳細不明",
         "observation_point": 1,
-        "epicenter_decision": "N"
+        "epicenter_decision": "N",
     }
 
     line5 = "A1968022501013347 075 341843 355 1391630 456 39     49J   5213Y 3103新島・神津島近海          3K\n"
@@ -122,7 +123,7 @@ def epicenter_records():
         "region2": 103,
         "epicenter_name": "新島・神津島近海",
         "observation_point": 3,
-        "epicenter_decision": "K"
+        "epicenter_decision": "K",
     }
 
     line6 = "A1968040109420403 048 322693 237 1322627 184 22     75J   52153T7300日向灘                   77K\n"
@@ -146,7 +147,7 @@ def epicenter_records():
         "region2": 300,
         "epicenter_name": "日向灘",
         "observation_point": 77,
-        "epicenter_decision": "K"
+        "epicenter_decision": "K",
     }
 
     line7 = "A2007032509415791 008 371324 016 1364116 040 107005369D66V511D314167能登半島沖             1740K\n"
@@ -170,7 +171,7 @@ def epicenter_records():
         "region2": 167,
         "epicenter_name": "能登半島沖",
         "observation_point": 1740,
-        "epicenter_decision": "K"
+        "epicenter_decision": "K",
     }
 
     line8 = "A19481221080719       2324       12136                      11  8311台湾付近                  1I\n"
@@ -194,7 +195,7 @@ def epicenter_records():
         "region2": 311,
         "epicenter_name": "台湾付近",
         "observation_point": 1,
-        "epicenter_decision": "I"
+        "epicenter_decision": "I",
     }
 
     line9 = "A19610414002611       27         12818      197            212  7294沖縄本島近海              2I\n"
@@ -218,7 +219,7 @@ def epicenter_records():
         "region2": 294,
         "epicenter_name": "沖縄本島近海",
         "observation_point": 2,
-        "epicenter_decision": "I"
+        "epicenter_decision": "I",
     }
 
     line10 = "A1920092202421216     445124     1532832     150    65W      1      千島列島南東沖            2 \n"
@@ -242,7 +243,7 @@ def epicenter_records():
         "region2": None,
         "epicenter_name": "千島列島南東沖",
         "observation_point": 2,
-        "epicenter_decision": None
+        "epicenter_decision": None,
     }
 
     records = [
@@ -267,24 +268,17 @@ def test_extract_datetime(epicenter_records):
 
 
 class TestConvertLatitudeLongitudeDeg:
-
     def test_latitude(self, epicenter_records):
         for line, expected in epicenter_records:
             actual = ex.convert_latitude_longitude_deg(
-                line=line,
-                degree=21,
-                minute=24,
-                second=26
+                line=line, degree=21, minute=24, second=26
             )
             assert actual == expected["latitude"]
 
     def test_longitude(self, epicenter_records):
         for line, expected in epicenter_records:
             actual = ex.convert_latitude_longitude_deg(
-                line=line,
-                degree=32,
-                minute=36,
-                second=38
+                line=line, degree=32, minute=36, second=38
             )
             assert actual == expected["longitude"]
 
@@ -292,10 +286,7 @@ class TestConvertLatitudeLongitudeDeg:
         line = "A194804282359000                                             1      時分不明データ  　　　    1D\n"
         with pytest.raises(ex.ExtractError):
             ex.convert_latitude_longitude_deg(
-                line=line,
-                degree=21,
-                minute=24,
-                second=26
+                line=line, degree=21, minute=24, second=26
             )
 
 
@@ -327,13 +318,11 @@ def abnormal_epicenter_records():
 
 
 class TestExtractEpicenter:
-
     def test_normal_records(self, epicenter_records):
         for line, expected in epicenter_records:
             actual = ex.extract_epicenter(line)
             for key, exp in expected.items():
                 assert actual[key] == exp
-
 
     def test_raise_ExtractError(self, abnormal_epicenter_records):
         for line in abnormal_epicenter_records:
