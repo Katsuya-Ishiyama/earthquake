@@ -61,7 +61,6 @@ MarkupSafe==2.0.1
 matplotlib==3.5.1
 mccabe==0.6.1
 mistune==0.8.4
--e git+git@github.com:Katsuya-Ishiyama/ml_framework.git@6f92e2bb4df9afb4a4156bfbd79d92a8bfbc3a64#egg=ml_framework
 mypy==0.942
 mypy-extensions==0.4.3
 nbclassic==0.3.7
