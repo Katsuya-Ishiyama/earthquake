@@ -1,21 +1,19 @@
 FROM python:3.9.9
 
 RUN apt-get update &&\
-    apt-get install git &&\
-    apt-get install sudo
+    apt-get install -y git sudo curl
 
 RUN useradd -m jupyter &&\
     echo "jupyter:jupyter" | chpasswd &&\
     adduser jupyter sudo
 USER jupyter
 
-RUN  mkdir -p /home/jupyter/.local/bin
-WORKDIR /home/jupyter
+ARG HOME_DIR=/home/jupyter
+RUN  mkdir -p ${HOME_DIR}/.local/bin
+WORKDIR ${HOME_DIR}
 
-COPY requirements.txt .
-ENV PATH ${PATH}:/home/jupyter/.local/bin
-RUN python -m pip install --upgrade pip setuptools &&\
-    python -m pip install --user -r requirements.txt &&\
-    rm requirements.txt
+RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+ENV PATH ${PATH}:${HOME_DIR}/.poetry/bin
+RUN . ~/.bashrc
 
 ENV SHELL /bin/bash
